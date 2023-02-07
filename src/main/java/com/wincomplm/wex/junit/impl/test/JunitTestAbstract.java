@@ -7,6 +7,7 @@
 
 package com.wincomplm.wex.junit.impl.test;
 
+import com.wincomplm.wex.wt.framework.api.system.WTConstants;
 import java.util.HashMap;
 import java.util.Map;
 import org.openqa.selenium.JavascriptExecutor;
@@ -33,4 +34,13 @@ public class JunitTestAbstract {
         if (driver != null)
             driver.quit();
     }
+    
+    protected String getAuthUrl(String auth) {
+        String url = WTConstants.CODEBASE;
+        int endOfProtocol  =url.indexOf("/") + 2;
+        String authUrl = url.substring(0,endOfProtocol) + auth + "@" + url.substring(endOfProtocol);
+        return authUrl;
+    }
+        
+        
 }

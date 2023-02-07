@@ -9,8 +9,8 @@
     <properties>
         <major>1</major>
         <minor>0</minor>
-        <beta>1</beta>
-        <revision>${major}.${minor}b${beta}-${wex.wt}</revision>
+        <beta></beta>
+        <revision>${major}.${minor}-${wex.wt}</revision>
     </properties>
     <groupId>com.wincomplm</groupId>
     <artifactId>wex-junit</artifactId>
@@ -34,6 +34,10 @@
             <groupId>com.wincomplm</groupId>
             <artifactId>wt-security-commons</artifactId>
         </dependency>
+           <dependency>
+            <groupId>com.wincomplm</groupId>
+            <artifactId>wex-wt-framework</artifactId>
+        </dependency>  
   
         <dependency>
             <groupId>junit</groupId>
