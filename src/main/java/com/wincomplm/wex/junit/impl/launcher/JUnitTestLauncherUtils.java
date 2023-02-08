@@ -7,6 +7,7 @@
 
 package com.wincomplm.wex.junit.impl.launcher;
 
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wincomplm.wex.kernel.impl.annotations.WexComponent;
@@ -20,15 +21,14 @@ import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.openqa.selenium.net.HostIdentifier;
-import wt.util.WTException;
 
 /**
  *
  * @author SimonHeath
  */
-@WexComponent(uid = "junit-methods", description = "Junit Methods")
-class JUnitTestLauncherUtils {
-        
+@WexComponent(uid = "junit-methods", description = "Test Methods")
+public class JUnitTestLauncherUtils {
+    
     @WexMethod(name = "runTest", description = "Run junit tests")
     public void runTest(HttpServletRequest httprequest, HttpServletResponse httpresponse,Class testClass) throws Exception {
         WexAdminCheckAccess.instance.checkAccess();
