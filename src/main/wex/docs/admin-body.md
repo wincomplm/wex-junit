@@ -1,3 +1,8 @@
 ## Admin Guide
 
-Link to perform tests [here](/Windchill/netmarkets/jsp/com/wincomplm/wex/example/ui/junit.jsp?pretty=true)
+Tests are run with the junit.jsp exposed by the extenions
+
+URL arguments
+
++ pretty : boolean
++ auth :  [user]:[password]
