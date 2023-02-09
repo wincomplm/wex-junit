@@ -19,6 +19,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * @author SimonHeath
  */
 public class JunitTestAbstract {
+    
+
+    static public String auth = "wcadmin:wcadmin";    
+
+    public static void setAuth(String auth) {
+        JunitTestAbstract.auth = auth;
+    }
 
     protected WebDriver driver;
     protected Map<String, Object> vars;
@@ -34,10 +41,14 @@ public class JunitTestAbstract {
         if (driver != null)
             driver.quit();
     }
-    
+       
+    protected String getAuthUrl() {
+        return getAuthUrl(auth);
+    }
+        
     protected String getAuthUrl(String auth) {
         String url = WTConstants.CODEBASE;
-        int endOfProtocol  =url.indexOf("/") + 2;
+        int endOfProtocol  = url.indexOf("/") + 2;
         String authUrl = url.substring(0,endOfProtocol) + auth + "@" + url.substring(endOfProtocol);
         return authUrl;
     }

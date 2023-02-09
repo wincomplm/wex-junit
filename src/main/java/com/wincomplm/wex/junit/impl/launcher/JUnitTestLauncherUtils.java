@@ -10,11 +10,13 @@ package com.wincomplm.wex.junit.impl.launcher;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wincomplm.wex.junit.impl.test.JunitTestAbstract;
 import com.wincomplm.wex.kernel.impl.annotations.WexComponent;
 import com.wincomplm.wex.kernel.impl.annotations.WexMethod;
 import com.wincomplm.wex.security.commons.impl.WexAdminCheckAccess;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.junit.internal.TextListener;
@@ -32,6 +34,13 @@ public class JUnitTestLauncherUtils {
     @WexMethod(name = "runTest", description = "Run junit tests")
     public void runTest(HttpServletRequest httprequest, HttpServletResponse httpresponse,Class testClass) throws Exception {
         WexAdminCheckAccess.instance.checkAccess();
+           
+        String auth = httprequest.getParameter("auth");
+        if (auth!=null) {
+            Method method = testClass.getMethod("setAuth", String.class);
+            method.invoke(testClass, auth);
+        }
+    
         String json = runTest(testClass);
         returnTest(httprequest, httpresponse, json);
     }
