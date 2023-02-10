@@ -40,7 +40,7 @@ jobs:
   - task: Maven@3
     displayName: JUnit Build 12.1
     inputs:
-      mavenPOMFile: pom.xml
+      mavenPOMFile: wex-junit/pom.xml
       goals: clean install
       options: '-P 12.1 -Dcve.check.skip=true -Djar.sign=true -Dwex.sign=true -Dobfuscate=false -Denv.ZKM_HOME=$(workDir)/zkm'
   - task: CopyFiles@2
