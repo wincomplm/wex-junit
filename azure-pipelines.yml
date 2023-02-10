@@ -37,6 +37,13 @@ jobs:
       parameterSearchText: '[password]'
       parameterReplaceText: $(support-wex-pwd)
       parameterFilesPattern: '*.xml'
+  - task: CopyFiles@2
+    displayName: Move settings.xml
+    inputs:
+      SourceFolder: $(workDir)/build
+      Contents: settings.xml
+      TargetFolder: C:\Users\VssAdministrator\.m2
+      OverWrite: true
   - task: Maven@3
     displayName: JUnit Build 12.1
     inputs:
