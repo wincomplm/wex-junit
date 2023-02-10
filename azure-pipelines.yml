@@ -1,0 +1,57 @@
+variables:
+- group: EDK Build Settings
+- name: workDir
+  value: '$(Build.SourcesDirectory)/wex-junit'
+
+resources:
+  repositories:
+  - repository: self
+    type: github
+    ref: trunk
+  - repository: wex-junit
+    type: github
+    endpoint: PTC
+    name: wincomplm/wex-junit
+    ref: main
+
+jobs:
+
+- job: Job_1
+  displayName: Build JUnit
+  pool:
+    vmImage: windows-latest
+  steps:
+  - checkout: self
+    clean: True
+  - checkout: wex-junit
+  - task: JavaToolInstaller@0
+    displayName: Use Java 11
+    inputs:
+      versionSpec: 11
+      jdkArchitectureOption: x64
+      jdkSourceOption: PreInstalled
+  - task: ReplaceInFilesTextByText@2
+    displayName: Update settings
+    inputs:
+      parameterSearchDirectory: $(workDir)/build
+      parameterSearchText: '[password]'
+      parameterReplaceText: $(support-wex-pwd)
+      parameterFilesPattern: '*.xml'
+  - task: Maven@3
+    displayName: JUnit Build 12.0
+    inputs:
+      mavenPOMFile: wex-ix/pom.xml
+      goals: clean install
+      options: '-P 12.0 -Dcve.check.skip=true -Djar.sign=true -Dwex.sign=true -Dobfuscate=false -Denv.ZKM_HOME=$(workDir)/zkm'
+  - task: CopyFiles@2
+    displayName: Copy Files Staging
+    condition: succeededOrFailed()
+    inputs:
+      SourceFolder: $(system.defaultworkingdirectory)
+      Contents: '**/*.wex'
+      TargetFolder: $(build.artifactstagingdirectory)
+  - task: PowerShell@2
+    displayName: Upload to teams
+    inputs:
+      filePath: $(workDir)/build/uploadToSharePointFilePath.ps1
+      arguments: '-SPVersion "Online" -SPUsername $(sp.user) -SPPassword $(sp.pwd) -SPURL https://wincomconsulting.sharepoint.com/sites/WexProducts -SPFolder /Documentos%20compartidos/JUnit/Latest -Folder $(build.artifactstagingdirectory)' 
