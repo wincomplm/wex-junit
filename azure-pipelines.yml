@@ -57,6 +57,45 @@ jobs:
       SourceFolder: $(system.defaultworkingdirectory)
       Contents: '**/*.wex'
       TargetFolder: $(build.artifactstagingdirectory)
+  - task: Maven@3
+    displayName: JUnit Build 12.0
+    inputs:
+      mavenPOMFile: wex-junit/pom.xml
+      goals: clean install
+      options: '-P 12.0 -Dcve.check.skip=true -Djar.sign=true -Dwex.sign=true -Dobfuscate=false -Denv.ZKM_HOME=$(workDir)/zkm'
+  - task: CopyFiles@2
+    displayName: Copy Files Staging
+    condition: succeededOrFailed()
+    inputs:
+      SourceFolder: $(system.defaultworkingdirectory)
+      Contents: '**/*.wex'
+      TargetFolder: $(build.artifactstagingdirectory)
+  - task: Maven@3
+    displayName: JUnit Build 11.2
+    inputs:
+      mavenPOMFile: wex-junit/pom.xml
+      goals: clean install
+      options: '-P 11.2 -Dcve.check.skip=true -Djar.sign=true -Dwex.sign=true -Dobfuscate=false -Denv.ZKM_HOME=$(workDir)/zkm'
+  - task: CopyFiles@2
+    displayName: Copy Files Staging
+    condition: succeededOrFailed()
+    inputs:
+      SourceFolder: $(system.defaultworkingdirectory)
+      Contents: '**/*.wex'
+      TargetFolder: $(build.artifactstagingdirectory)
+  - task: Maven@3
+    displayName: JUnit Build 11.1
+    inputs:
+      mavenPOMFile: wex-junit/pom.xml
+      goals: clean install
+      options: '-P 11.1 -Dcve.check.skip=true -Djar.sign=true -Dwex.sign=true -Dobfuscate=false -Denv.ZKM_HOME=$(workDir)/zkm'
+  - task: CopyFiles@2
+    displayName: Copy Files Staging
+    condition: succeededOrFailed()
+    inputs:
+      SourceFolder: $(system.defaultworkingdirectory)
+      Contents: '**/*.wex'
+      TargetFolder: $(build.artifactstagingdirectory)
   - task: PowerShell@2
     displayName: Upload to teams
     inputs:
