@@ -10,6 +10,7 @@ package com.wincomplm.wex.junit.impl.test;
 import com.wincomplm.wex.wt.framework.api.system.WTConstants;
 import java.util.HashMap;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,16 +21,25 @@ import org.openqa.selenium.chrome.ChromeDriver;
  */
 public class JunitTestAbstract {
     
+    protected WebDriver driver;
+    protected Map<String, Object> vars;
+    JavascriptExecutor js;
+    String baseurl;
 
     static public String auth = "wcadmin:wcadmin";    
+
+    public String getBaseurl() {
+        return baseurl;
+    }
+
+    public void setBaseurl(String baseurl) {
+        this.baseurl = baseurl;
+    }
 
     public static void setAuth(String auth) {
         JunitTestAbstract.auth = auth;
     }
 
-    protected WebDriver driver;
-    protected Map<String, Object> vars;
-    JavascriptExecutor js;
 
     public void setUp() {
         driver = new ChromeDriver();
@@ -53,5 +63,8 @@ public class JunitTestAbstract {
         return authUrl;
     }
         
-        
+    protected void checkNonce(String url) {
+        driver.get(getAuthUrl() + url);
+        assertEquals(driver.getPageSource().contains("INVALID_NONCE"),true);
+    }
 }
