@@ -44,7 +44,7 @@ jobs:
       Contents: settings.xml
       TargetFolder: C:\Users\VssAdministrator\.m2
       OverWrite: true
-  - task: Maven@2
+  - task: Maven@4
     displayName: JUnit Build 12.1
     inputs:
       mavenPOMFile: wex-junit/pom.xml
