@@ -8,7 +8,7 @@
     </parent>
     <properties>
         <major>1</major>
-        <minor>3</minor>
+        <minor>4</minor>
         <beta></beta>
         <revision>${major}.${minor}-${wex.wt}</revision>
     </properties>
@@ -45,7 +45,11 @@
             <version>4.13.2</version>
      
         </dependency>
-        
+        <dependency>
+            <groupId>com.wincomplm</groupId>
+            <artifactId>wex-security-doc-annotations</artifactId>
+            <version>1.0</version>
+        </dependency>
         
         <dependency>
             <groupId>io.netty</groupId>
