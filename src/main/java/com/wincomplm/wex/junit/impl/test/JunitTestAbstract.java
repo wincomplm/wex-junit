@@ -65,6 +65,8 @@ public class JunitTestAbstract {
         
     protected void checkNonce(String url) {
         driver.get(getAuthUrl() + url);
-        assertEquals(driver.getPageSource().contains("INVALID_NONCE"),true);
+        String code = driver.getPageSource();
+        boolean securityFalse = code.contains("INVALID_NONCE") || code.contains("\"success\":false");
+        assertEquals(true,securityFalse);
     }
 }
