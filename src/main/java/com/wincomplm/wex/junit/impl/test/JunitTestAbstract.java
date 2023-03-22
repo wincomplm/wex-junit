@@ -14,6 +14,8 @@ import static org.junit.Assert.assertEquals;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
  *
@@ -42,7 +44,13 @@ public class JunitTestAbstract {
 
 
     public void setUp() {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");  
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        options.merge(capabilities);
+        driver = new ChromeDriver(options);
+
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
     }
