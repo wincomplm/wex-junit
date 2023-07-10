@@ -4,6 +4,8 @@
  */
 package com.wincomplm.wex.junit.impl.test;
 
+import com.wincomplm.wex.config.impl.ifc.IWexConfiguration;
+import com.wincomplm.wex.store.commons.impl.persist.WexPersistor;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
@@ -16,21 +18,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  * @author Yang Hao Zhang
  */
-public class JUnitDataConfiguration extends JunitTestAbstract{
-     //this methods takes an ID to wait for, otherwise it would cause a race condition
-    protected void cleanUp(String ReloadID) throws Exception {
-        try {
-            List<WebElement> isFound = driver.findElements(By.xpath("//i[@class='fas fa-minus']"));
-            isFound.stream().forEach(element -> element.click());
-            //Update button 
-            driver.findElement(By.xpath("//button[@type='submit']")).click();
-            driver.get(driver.getCurrentUrl());
+public class JUnitDataConfiguration extends JunitTestAbstract {
+    
+     protected WexPersistor<IWexConfiguration> getConfigPersistor(String pid) throws Exception {
+        String name = (pid + " - CONFIG").toUpperCase();
+        return WexPersistor.newWexPersistor(null, "/Default/wex/config", name);
+    }
 
-            new WebDriverWait(driver, Duration.ofSeconds(60)).until(ExpectedConditions.elementToBeClickable(By.id(ReloadID)));
-
-        } catch (Exception e) {
-            // Element not found, do nothing
-        }
+    protected void deleteConfigUsingPersistor(String pid) throws Exception {
+        WexPersistor persistor = getConfigPersistor( pid);
+        persistor.deleteDocument();
+    }
+    
+    //this methods takes an ID to wait for, otherwise it would cause a race condition
+    protected void reload(String elementToWaitID) {
+        driver.get(driver.getCurrentUrl());
+        new WebDriverWait(driver, Duration.ofSeconds(300)).until(ExpectedConditions.elementToBeClickable(By.id(elementToWaitID)));
     }
 
     protected String getRandomValueArray(String[] array) {
@@ -65,5 +68,4 @@ public class JUnitDataConfiguration extends JunitTestAbstract{
         return value;
     }
 
-    
 }

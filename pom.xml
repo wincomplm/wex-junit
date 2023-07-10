@@ -8,7 +8,7 @@
     </parent>
     <properties>
         <major>1</major>
-        <minor>8</minor>
+        <minor>9</minor>
         <beta></beta>
         <revision>${major}.${minor}-${wex.wt}</revision>
     </properties>
@@ -133,8 +133,17 @@
       
       
         </dependency>
-
-
-
+        <dependency>
+            <groupId>com.wincomplm</groupId>
+            <artifactId>wex-config</artifactId>
+            <version>1.26-12.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.wincomplm</groupId>
+            <artifactId>wex-store-commons</artifactId>
+            <version>1.1-12.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies> 
 </project>
