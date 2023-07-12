@@ -32,7 +32,7 @@ public class JUnitDataConfiguration extends JunitTestAbstract {
     
     //this methods takes an ID to wait for, otherwise it would cause a race condition
     protected void reload(String elementToWaitID) {
-        driver.get(driver.getCurrentUrl());
+        driver.navigate().refresh();
         new WebDriverWait(driver, Duration.ofSeconds(300)).until(ExpectedConditions.elementToBeClickable(By.id(elementToWaitID)));
     }
 
