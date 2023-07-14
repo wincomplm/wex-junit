@@ -12,6 +12,7 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -34,7 +35,6 @@ public class JUnitDataConfiguration extends JunitTestAbstract {
     protected void reload(String elementToWaitID) {
         try {
             Thread.sleep(1000);
-            //i dont know when the 200 comes back 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -52,26 +52,39 @@ public class JUnitDataConfiguration extends JunitTestAbstract {
         return list.get(randomIndex);
     }
 
-    protected String getRandomValueFromDropDownByID(String ID) {
-        String value;
-        do {
-            value = getRandomValueList(driver.findElement(By.id(ID))
-                    .findElements(By.xpath(".//option")))
-                    .getText();
-
-        } while (value.isEmpty());
-
-        return value;
-    }
-
     protected String getRandomValueFromDropDownByXpath(String Xpath) {
-        String value = getRandomValueList(driver.findElement(By.id(Xpath))
+        String value = getRandomValueList(driver.findElement(By.xpath(Xpath))
                 .findElements(By.xpath(".//option")))
                 .getText();
         while (value == "") {
             getRandomValueFromDropDownByXpath(Xpath);
         }
         return value;
+    }
+
+    protected void loadConfigTab(String URLEnd, String firstElementByID) {
+        //url
+        String url = getBaseurl() + URLEnd;
+        //wait for the page to load 
+        driver.get(getAuthUrl() + url);
+        reload(firstElementByID);
+    }
+
+    protected String getFirstOptionByXpath(String xpath) {
+        String text = new Select(driver.findElement(By.xpath(xpath))).getFirstSelectedOption().getText();
+        return text;
+    }
+
+    protected String getValueByXpath(String xpath) {
+        String text = driver.findElement(By.xpath(xpath)).getAttribute("value");
+
+        return text;
+    }
+
+    protected boolean isSelectedByXpath(String xpath) {
+        boolean isSelected = driver.findElement(By.xpath(xpath)).isSelected();
+
+        return isSelected;
     }
 
 }
