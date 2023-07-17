@@ -34,7 +34,7 @@ public class JUnitDataConfiguration extends JunitTestAbstract {
     //this methods takes an ID to wait for, otherwise it would cause a race condition
     protected void reload(String elementToWaitID) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
