@@ -10,7 +10,9 @@ import com.wincomplm.wex.wt.framework.api.system.WTConstants;
 import java.util.HashMap;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
+import org.openqa.selenium.HasAuthentication;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.UsernameAndPassword;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -42,13 +44,9 @@ public class JunitTestAbstract {
     }
 
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        options.merge(capabilities);
-        driver = new ChromeDriver(options);
-
+        driver = new ChromeDriver();
+        HasAuthentication authentication = (HasAuthentication) driver;
+        authentication.register(() -> new UsernameAndPassword("wcadmin", "wcadmin"));
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
     }
@@ -66,7 +64,7 @@ public class JunitTestAbstract {
     protected String getAuthUrl(String auth) {
         String url = WTConstants.CODEBASE;
         int endOfProtocol = url.indexOf("/") + 2;
-        String authUrl = url.substring(0, endOfProtocol) + auth + "@" + url.substring(endOfProtocol);
+        String authUrl = url.substring(0, endOfProtocol)+ /*auth + "@" +*/ url.substring(endOfProtocol);
         return authUrl;
     }
 
