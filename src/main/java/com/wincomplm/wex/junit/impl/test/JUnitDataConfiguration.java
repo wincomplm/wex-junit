@@ -4,8 +4,6 @@
  */
 package com.wincomplm.wex.junit.impl.test;
 
-import com.wincomplm.wex.config.impl.ifc.IWexConfiguration;
-import com.wincomplm.wex.store.commons.impl.persist.WexPersistor;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
@@ -20,16 +18,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Yang Hao Zhang
  */
 public class JUnitDataConfiguration extends JunitTestAbstract {
-
-    protected WexPersistor<IWexConfiguration> getConfigPersistor(String pid) throws Exception {
-        String name = (pid + " - CONFIG").toUpperCase();
-        return WexPersistor.newWexPersistor(null, "/Default/wex/config", name);
-    }
-
-    protected void deleteConfigUsingPersistor(String pid) throws Exception {
-        WexPersistor persistor = getConfigPersistor(pid);
-        persistor.deleteDocument();
-    }
 
     //this methods takes an ID to wait for, otherwise it would cause a race condition
     protected void reload(String elementToWaitID) {
