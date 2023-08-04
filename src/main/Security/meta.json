@@ -1,0 +1,34 @@
+{
+    "level":"B",
+    "approval": {
+        "review": { "name":"", "date":"" },
+        "approve": { "name":"", "date":"" },
+        "ptcapprove": { "name":"", "date":"" }
+    },
+    "suppress": [
+        { "id":"CVE-2022-45688", "reason":"This API is encapsulated and there is no attack, hutool-json not used" },
+        { "id":"CVE-2022-26336", "reason":"poi-scratchpad is not used" }
+    ],
+    "assessments": {
+        "LevelA": [
+            { "desc":"Offers services to other systems",                    "valid":"" },
+            { "desc":"Server to server with other systems",                 "valid":"" },
+            { "desc":"Browser based communication with other systems",      "valid":"" },
+            { "desc":"Stores and manages credentials",                      "valid":"" },
+            { "desc":"Any direct database access",                          "valid":"" }
+        ],    
+        "LevelB": [
+            { "desc":"Escalation privilage access to Windchill",            "valid":"" },
+            { "desc":"Administration Only UIs",                             "valid":"" },
+            { "desc":"Direct access UIs e.g. downloads",                    "valid":"" },
+            { "desc":"Requires XSS/CSRF testing",                           "valid":"" }
+            
+        ],
+        "LevelC": [
+            { "desc":"Implements a Windchill UI",                           "valid":"" }
+        ]                 
+    }
+}
+       
+
+      
