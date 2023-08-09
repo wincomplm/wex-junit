@@ -61,6 +61,18 @@ public class JUnitDataConfiguration extends JunitTestAbstract {
         }
         return value;
     }
+    
+    protected String getRandomValueFromDropDownByID(String ID) {
+        String value;
+        do {
+            value = getRandomValueList(driver.findElement(By.id(ID))
+                    .findElements(By.xpath(".//option")))
+                    .getText();
+
+        } while (value.isEmpty());
+
+        return value;
+    }
 
     protected void loadConfigTab(String URLEnd, String firstElementByID) {
         //url
