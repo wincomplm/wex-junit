@@ -8,7 +8,7 @@
     </parent>
     <properties>
         <major>1</major>
-        <minor>15</minor>
+        <minor>16</minor>
         <beta></beta>
         <revision>${major}.${minor}-${wex.wt}</revision>
     </properties>
@@ -126,12 +126,6 @@
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>   
             </exclusions> 
-        </dependency>
-        <dependency>
-            <groupId>com.wincomplm</groupId>
-            <artifactId>wex-config</artifactId>
-            <type>jar</type>
-            <version>1.26-12.1</version>
         </dependency>
         <dependency>
             <groupId>com.wincomplm</groupId>
