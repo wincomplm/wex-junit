@@ -1,0 +1,6 @@
+[
+    {
+        "id": "com.wincomplm.wex-junit",
+        "rules": ["WVE-2023-0504","WVE-2023-0506"]
+    }
+]
