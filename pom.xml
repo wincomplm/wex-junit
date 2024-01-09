@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.wincomplm</groupId>
-        <artifactId>wex-parent</artifactId>
-        <version>2.48</version>
+        <artifactId>wex-parent-private</artifactId>
+        <version>3.2</version>
     </parent>
     <properties>
         <major>1</major>
@@ -28,7 +28,6 @@
         <dependency>
             <groupId>com.wincomplm</groupId>
             <artifactId>wex-system</artifactId>
-            <version>1.3-12.1</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -131,7 +130,6 @@
             <groupId>com.wincomplm</groupId>
             <artifactId>wex-store-commons</artifactId>
             <type>jar</type>
-            <version>1.1-12.1</version>
         </dependency>
     </dependencies> 
 </project>
