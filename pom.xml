@@ -11,8 +11,8 @@
     <properties>
         <major>1</major>
         <minor>17</minor>
-        <beta>1</beta>
-        <revision>${major}.${minor}b${beta}-${wex.wt}</revision>
+        <beta></beta>
+        <revision>${major}.${minor}-${wex.wt}</revision>
     </properties>
     <version>${revision}</version>
     <packaging>jar</packaging>
