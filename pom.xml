@@ -6,11 +6,11 @@
         <artifactId>wex-parent-private</artifactId>
         <version>3.15-SNAPSHOT</version>
     </parent>
-        <groupId>com.wincomplm</groupId>
+    <groupId>com.wincomplm</groupId>
     <artifactId>wex-junit</artifactId>
     <properties>
         <major>1</major>
-        <minor>17</minor>
+        <minor>18</minor>
         <beta></beta>
         <revision>${major}.${minor}-${wex.wt}</revision>
     </properties>
@@ -36,8 +36,8 @@
         </dependency>
         <dependency>
             <groupId>com.wincomplm</groupId>
-            <artifactId>wex-wt-framework</artifactId>
-        </dependency>  
+            <artifactId>wex-servlet-support</artifactId>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -125,10 +125,10 @@
                 </exclusion>   
             </exclusions> 
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>com.wincomplm</groupId>
             <artifactId>wex-store-commons</artifactId>
             <type>jar</type>
-        </dependency>
+        </dependency-->
     </dependencies> 
 </project>

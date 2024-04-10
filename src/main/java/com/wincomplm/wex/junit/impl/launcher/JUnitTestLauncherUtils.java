@@ -10,15 +10,14 @@ package com.wincomplm.wex.junit.impl.launcher;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wincomplm.wex.junit.impl.test.JunitTestAbstract;
 import com.wincomplm.wex.kernel.impl.annotations.WexComponent;
 import com.wincomplm.wex.kernel.impl.annotations.WexMethod;
 import com.wincomplm.wex.security.commons.impl.WexAdminCheckAccess;
+import com.wincomplm.wex.servlet.support.WexServletRequestWrapper;
+import com.wincomplm.wex.servlet.support.WexServletResponseWrapper;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -32,7 +31,7 @@ import org.openqa.selenium.net.HostIdentifier;
 public class JUnitTestLauncherUtils {
     
     @WexMethod(name = "runTest", description = "Run junit tests")
-    public void runTest(HttpServletRequest httprequest, HttpServletResponse httpresponse,Class testClass) throws Exception {
+    public void runTest(WexServletRequestWrapper httprequest, WexServletResponseWrapper httpresponse,Class testClass) throws Exception {
         WexAdminCheckAccess.instance.checkAccess();
            
         String auth = httprequest.getParameter("auth");
@@ -45,7 +44,7 @@ public class JUnitTestLauncherUtils {
         returnTest(httprequest, httpresponse, json);
     }
     
-    public void returnTest(HttpServletRequest httprequest, HttpServletResponse httpresponse, String json) throws IOException {
+    public void returnTest(WexServletRequestWrapper httprequest, WexServletResponseWrapper httpresponse, String json) throws IOException {
         boolean pretty = httprequest.getParameter("pretty")!=null;
         if (pretty) httpresponse.getOutputStream().print( "<pre>");
         httpresponse.getOutputStream().print( json);

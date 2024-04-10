@@ -6,7 +6,7 @@
  */
 package com.wincomplm.wex.junit.impl.test;
 
-import com.wincomplm.wex.wt.framework.api.system.WTConstants;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import wt.util.WTProperties;
 
 /**
  *
@@ -64,10 +65,14 @@ public class JunitTestAbstract {
     }
 
     protected String getAuthUrl(String auth) {
-        String url = WTConstants.CODEBASE;
-        int endOfProtocol = url.indexOf("/") + 2;
-        String authUrl = url.substring(0, endOfProtocol) + auth + "@" + url.substring(endOfProtocol);
-        return authUrl;
+        try {
+            String url = WTProperties.getLocalProperties().getProperty("wt.server.codebase");
+            int endOfProtocol = url.indexOf("/") + 2;
+            String authUrl = url.substring(0, endOfProtocol) + auth + "@" + url.substring(endOfProtocol);
+            return authUrl;
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     protected void checkNonce(String url) {
