@@ -3,16 +3,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.wincomplm</groupId>
-        <artifactId>wex-parent-private</artifactId>
-        <version>3.15</version>
+        <artifactId>wex-parent</artifactId>
+        <version>3.5-SNAPSHOT</version>
     </parent>
     <groupId>com.wincomplm</groupId>
     <artifactId>wex-junit</artifactId>
     <properties>
         <major>1</major>
-        <minor>18</minor>
-        <beta></beta>
-        <revision>${major}.${minor}-${wex.wt}</revision>
+        <minor>19</minor>
+        <beta>1</beta>
+        <revision>${major}.${minor}b${beta}-${wex.wt}</revision>
     </properties>
     <version>${revision}</version>
     <packaging>jar</packaging>
